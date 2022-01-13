@@ -1,42 +1,70 @@
-# Advanced Sample Hardhat Project
+# Pets NFT Distribution Contract
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+** This series of NFTs consist of 8888 collections with different properties.**
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+Discord:
 
-Try running some of the following tasks:
+Twitter:
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.js
-node scripts/deploy.js
-npx eslint '**/*.js'
-npx eslint '**/*.js' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
+Website:
+
+## Whitelist
+
+## Shuffle
+
+Choose a seed and shuffle the images with the seed. The seed will be public.
+
+## Provenance
+
+image_hash = sha256(image metadata)
+
+PROVENANCE = sha256(abi.encodePacked(image1_hash, image2_hash, ... image8888_hash));
+
+We will set the provennace before mint.
+
+## Mint Process
+
+Whitelist 4000 + Reserve 100 + Public Sale 4788
+
+- Community choose a start index. Change the image uri to be correct.
+
+- Set the whitelist to the contract.
+
+- Start the whitelist mint(4000).
+
+- Reserve mint(100).
+
+- Public sale(4788).
+
+## IPFS Storage
+
+tokenURI: ipfs://{file_hash}//{tokenId}
+
+```
+{
+    "image":"ipfs:\/\/{hash}",
+    "name":"Pets #333",
+    "description":"A community-driven collectibles project.",
+    "attributes":[
+        {"trait_type":"face","value":"grumpy"},
+        {"trait_type":"hair","value":"blue messy"},
+        {"trait_type":"body","value":"spotted hoodie"},
+        {"trait_type":"background","value":"grey"},
+        {"trait_type":"head","value":"orange"}
+    ]
+}
 ```
 
-# Etherscan verification
+## Shuffle Example
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
+Initial order:
 
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
+image1, image2, image3, ..., image8888
 
-```shell
-hardhat run --network ropsten scripts/deploy.js
-```
+Shuffle:
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+image8, image576, image 1234, ..., image600
 
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
-```
+Start Index(2):
+
+image576(tokenId = 0), image1234, ..., image600, image8(tokenId = 8887)
